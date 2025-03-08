@@ -4,13 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Free Bobux 💰🤑🤑</title>
+
+  <!-- Open Graph Meta Tags (For Facebook Link Preview) -->
+  <meta property="og:title" content="Free Bobux! 💰🤑">
+  <meta property="og:description" content="Click to claim your free Bobux!">
+  <meta property="og:image" content="https://your-username.github.io/Trusted-Website/preview.jpg">
+  <meta property="og:url" content="https://your-username.github.io/Trusted-Website/">
+  <meta property="og:type" content="website">
+
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
       margin-top: 100px;
       background-color: white;
-      user-select: none; /* Prevents text selection */
+      user-select: none;
     }
 
     button {
@@ -36,10 +44,10 @@
       width: 100vw;
       height: 100vh;
       object-fit: cover;
-      pointer-events: none; /* Disable right-click on image */
-      -webkit-touch-callout: none; /* Disable long press on iOS */
-      -webkit-user-drag: none; /* Disable dragging the image */
-      -webkit-user-select: none; /* Prevent selection */
+      pointer-events: none;
+      -webkit-touch-callout: none;
+      -webkit-user-drag: none;
+      -webkit-user-select: none;
       user-select: none;
     }
 
@@ -54,7 +62,7 @@
     <button id="scare-button">Pogi Button</button>
     <div id="jumpscare" class="hidden">
       <img src="images (30).jpeg" alt="Scary Face">
-      <audio id="jumpscare-audio" src="Scary Woman Screaming - Sound Effect (HD)(3)(2).mp3" preload="auto"></audio>
+      <audio id="jumpscare-audio" src="Scary Woman Screaming.mp3" preload="auto"></audio>
     </div>
   </div>
 
@@ -72,25 +80,24 @@
       // Show jumpscare
       jumpscare.style.display = 'flex';
 
-      // Play the single combined audio
+      // Play the audio
       jumpscareAudio.play().catch(error => console.log("Audio play error:", error));
 
-      // Start flashing effect (10 times per second)
+      // Start flashing effect
       flashInterval = setInterval(() => {
-        jumpscare.style.backgroundColor = (jumpscare.style.backgroundColor === 'black') ? 'white' : 'black';
+        body.style.backgroundColor = (body.style.backgroundColor === 'white') ? 'black' : 'white';
       }, 100);
 
       // Stop jumpscare after 17 seconds
       setTimeout(function() {
         jumpscare.style.display = 'none';
         clearInterval(flashInterval);
-        jumpscare.style.backgroundColor = 'black'; // Reset background
-        body.style.backgroundColor = 'white'; // Reset body background
-        button.style.display = 'inline-block'; // Show button again
+        body.style.backgroundColor = 'white';
+        button.style.display = 'inline-block';
       }, 17000);
     });
 
-    // Prevent long press and right-click
+    // Prevent long press, right-click, and developer tools
     document.addEventListener('contextmenu', event => event.preventDefault());
     document.addEventListener('keydown', event => {
       if (event.key === "F12" || (event.ctrlKey && event.shiftKey && event.key === "I")) {
