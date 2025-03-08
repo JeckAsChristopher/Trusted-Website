@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jumpscare</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+      background-color: white;
+      user-select: none; /* Prevents text selection */
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    #jumpscare {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    #jumpscare img {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      pointer-events: none; /* Disable right-click on image */
+      -webkit-touch-callout: none; /* Disable long press on iOS */
+      -webkit-user-drag: none; /* Disable dragging the image */
+      -webkit-user-select: none; /* Prevent selection */
+      user-select: none;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body oncontextmenu="return false;">
+  <div class="container">
+    <h1>Click here for a surprise!</h1>
+    <button id="scare-button">Click me!</button>
+    <div id="jumpscare" class="hidden">
+      <img src="images (30).jpeg" alt="Scary Face">
+      <audio id="jumpscare-audio" src="Scary Woman Screaming - Sound Effect (HD)(3)(2).mp3" preload="auto"></audio>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('scare-button').addEventListener('click', function() {
+      var jumpscare = document.getElementById('jumpscare');
+      var jumpscareAudio = document.getElementById('jumpscare-audio');
+      var body = document.body;
+      var button = document.getElementById('scare-button');
+      let flashInterval;
+
+      // Hide the button
+      button.style.display = 'none';
+
+      // Show jumpscare
+      jumpscare.style.display = 'flex';
+
+      // Play the single combined audio
+      jumpscareAudio.play().catch(error => console.log("Audio play error:", error));
+
+      // Start flashing effect (10 times per second)
+      flashInterval = setInterval(() => {
+        jumpscare.style.backgroundColor = (jumpscare.style.backgroundColor === 'black') ? 'white' : 'black';
+      }, 100);
+
+      // Stop jumpscare after 17 seconds
+      setTimeout(function() {
+        jumpscare.style.display = 'none';
+        clearInterval(flashInterval);
+        jumpscare.style.backgroundColor = 'black'; // Reset background
+        body.style.backgroundColor = 'white'; // Reset body background
+        button.style.display = 'inline-block'; // Show button again
+      }, 17000);
+    });
+
+    // Prevent long press and right-click
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    document.addEventListener('keydown', event => {
+      if (event.key === "F12" || (event.ctrlKey && event.shiftKey && event.key === "I")) {
+        event.preventDefault();
+      }
+    });
+  </script>
+</body>
+</html>
